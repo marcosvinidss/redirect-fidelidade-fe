@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inscrições Conferência de Mulheres — Fidelidade Fé</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(160deg, #1a1a2e 0%, #16213e 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    color: #fff;
+    text-align: center;
+  }
+  .card {
+    max-width: 420px;
+    width: 100%;
+  }
+  .spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255,255,255,0.2);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 24px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  h1 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  p {
+    font-size: 15px;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.5;
+    margin-bottom: 24px;
+  }
+  .btn {
+    display: inline-block;
+    background: #fff;
+    color: #16213e;
+    font-weight: 600;
+    font-size: 16px;
+    padding: 14px 28px;
+    border-radius: 999px;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
+  .hint {
+    margin-top: 20px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    display: none;
+  }
+  .hint.show { display: block; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="spinner" id="spinner"></div>
+    <h1>Abrindo a página de inscrição…</h1>
+    <p>Se não abrir automaticamente em alguns segundos, toque no botão abaixo.</p>
+    <button class="btn" id="openBtn">Abrir inscrição</button>
+    <p class="hint" id="hint">
+      Parece que você está num navegador dentro de um app (Instagram/TikTok).
+      Toque nos <strong>três pontinhos (⋮)</strong> ou no ícone de compartilhar no topo
+      e escolha <strong>"Abrir no navegador"</strong> para continuar.
+    </p>
+  </div>
+
+  <script>
+    // === COLE O LINK COMPLETO DO APPS SCRIPT AQUI ===
+    var DESTINO = "https://script.google.com/macros/s/AKfycbykd8wHACQYM6qUzz6ENYLhekZ9i1plYgzoTCSOrR-vv-AqOg8PCIOtR5wHtU2GYPQzEA/exec";
+
+    function abrir() {
+      window.location.href = DESTINO;
+    }
+
+    // Tenta redirecionar automaticamente
+    abrir();
+
+    // Botão manual (o clique do usuário ajuda a contornar bloqueios do navegador interno)
+    document.getElementById("openBtn").addEventListener("click", abrir);
+
+    // Detecta navegador interno de apps comuns e mostra dica extra
+    var ua = navigator.userAgent || "";
+    var isInApp = /Instagram|FBAN|FBAV|TikTok|Line|MicroMessenger/i.test(ua);
+    if (isInApp) {
+      document.getElementById("hint").classList.add("show");
+    }
+
+    // Depois de 2s, se ainda estiver na página, mostra a dica mesmo sem detectar in-app
+    setTimeout(function () {
+      document.getElementById("hint").classList.add("show");
+    }, 2500);
+  </script>
+</body>
+</html>
